@@ -9,6 +9,7 @@ DATA_DIR = os.path.join(BASE_DIR, "data")
 os.makedirs(DATA_DIR, exist_ok=True)
 print(f"Diretório de dados: {DATA_DIR}")
 def processar_acessos(arquivo_csv, arquivo_mestre=os.path.join(DATA_DIR, "acessos_consolidados.csv")):
+    print(f"Processando arquivo: {arquivo_csv}")
     arquivo_csv = os.path.join(DATA_DIR, arquivo_csv)  # Garante que a entrada esteja na pasta correta
     relatorio_saida = os.path.join(DATA_DIR, "relatorio_acessos.csv")  # Define o caminho do relatório
 
@@ -56,5 +57,6 @@ def processar_acessos(arquivo_csv, arquivo_mestre=os.path.join(DATA_DIR, "acesso
     acessos_mensais.to_csv(relatorio_saida, index=False, sep=';', encoding='utf-8')
     print(f"Relatório gerado com sucesso: {relatorio_saida}")
 
-# Exemplo de uso
-# processar_acessos("acessos.csv")
+# Iniciar o processamento
+if __name__ == "__main__":
+    processar_acessos("acessos2.csv")
