@@ -136,10 +136,18 @@ def criar_interface():
     # Criar um estilo customizado para o botão
     style.configure('custom.TButton',
                     background="#fcc42c",  # Cor de fundo
-                    padding=10,  # Espaçamento
-                    font=("Helvetica", 12, "bold"),  # Fonte
+                    padding=5,  # Espaçamento
+                    font=("Helvetica", 12),  # Fonte
                     foreground="white",  # Cor do texto
-                    focuscolor="none")  # Desabilitar foco para o botão
+                    focuscolor="none",  # Desabilitar foco para o botão
+                    borderwidth=3,  # Tamanho da borda
+                    relief="solid",  # Tipo de borda
+                    bordercolor="#fcc42c")  # Cor da borda
+    
+    # Mapear o efeito de hover para o botão (quando o mouse passar sobre)
+    style.map('custom.TButton',
+              background=[('active', '#ffb84d'),  # Cor de fundo ao passar o mouse
+                          ('!active', '#fcc42c')])  # Cor de fundo normal
 
     # Botão para selecionar o CSV com o estilo customizado
     selecionar_btn = ttk.Button(root, text="Selecionar CSV", command=selecionar_arquivo, style="custom.TButton")
