@@ -44,10 +44,10 @@ def processar_acessos(arquivo_csv, arquivo_mestre=os.path.join(DATA_DIR, "acesso
     acessos_por_dia = df_consolidado.groupby(["Usuario", "Mes", "Dia"]).size().reset_index(name="Acessos Diarios")
     
     # Contar acessos totais por cliente no mês
-    acessos_mensais = acessos_por_dia.groupby(["Usuario", "Mes"]).size().reset_index(name="Nº de Acessos")
+    acessos_mensais = acessos_por_dia.groupby(["Usuario", "Mes"]).size().reset_index(name="Num de Acessos")
     
     # Criar coluna "Controle" (SIM/NÃO para clientes com 6 ou mais acessos)
-    acessos_mensais["Controle"] = acessos_mensais["Nº de Acessos"].apply(lambda x: "SIM" if x >= 6 else "NÃO")
+    acessos_mensais["Controle"] = acessos_mensais["Num de Acessos"].apply(lambda x: "SIM" if x >= 6 else "NAO")
     
     # Contar total de clientes com 6 ou mais acessos
     total_controle = acessos_mensais[acessos_mensais["Controle"] == "SIM"].shape[0]
