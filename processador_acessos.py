@@ -9,6 +9,9 @@ from ttkbootstrap import ttk  # Importar ttk do ttkbootstrap para usar o estilo
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 
+# Caminho correto para o ícone
+favicon_path = os.path.join(BASE_DIR, "data", "flux_favicon_48x48.ico")
+
 # Criar diretório se não existir
 os.makedirs(DATA_DIR, exist_ok=True)
 
@@ -127,7 +130,7 @@ def criar_interface():
     root.geometry("250x150")  # Aumente os valores conforme necessário
 
     # Definir o favicon (ícone) da janela
-    root.iconbitmap("data/flux_favicon_48x48.ico")  # Substitua pelo caminho correto do seu arquivo .ico
+    root.iconbitmap(favicon_path)  # Substitua pelo caminho correto do seu arquivo .ico
 
 
     # Título da janela
