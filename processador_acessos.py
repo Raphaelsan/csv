@@ -1,5 +1,9 @@
 import pandas as pd
 import os
+import tkinter as tk
+from tkinter import filedialog
+from ttkbootstrap import Style
+from ttkbootstrap import ttk  # Importar ttk do ttkbootstrap para usar o estilo
 
 # Definir diretórios
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -102,5 +106,54 @@ def processar_acessos(arquivo_csv, arquivo_mestre=os.path.join(DATA_DIR, "acesso
 
     print(f"Relatório de acessos por dia da semana salvo: {relatorio_dia_saida}")
 
-# Exemplo de uso
-processar_acessos("acessos2.csv")
+
+# Função para abrir o diálogo de seleção de arquivo
+def selecionar_arquivo():
+    arquivo_csv = filedialog.askopenfilename(title="Selecione o arquivo CSV", filetypes=[("CSV Files", "*.csv")])
+    
+    if arquivo_csv:
+        processar_acessos(arquivo_csv)
+        resultado_label.config(text="Arquivo processado com sucesso!")
+
+# Criando a interface gráfica
+def criar_interface():
+    # Estilo ttkbootstrap
+    style = Style(theme='superhero')
+
+    # Janela principal
+    root = style.master
+
+    # Definir o tamanho da janela principal (largura x altura)
+    root.geometry("250x150")  # Aumente os valores conforme necessário
+
+    # Definir o favicon (ícone) da janela
+    root.iconbitmap("flux_favicon_48x48.ico")  # Substitua pelo caminho correto do seu arquivo .ico
+
+
+    # Título da janela
+    root.title("Processador de Acessos Casa7")
+
+    # Criar um estilo customizado para o botão
+    style.configure('custom.TButton',
+                    background="#fcc42c",  # Cor de fundo
+                    padding=10,  # Espaçamento
+                    font=("Helvetica", 12, "bold"),  # Fonte
+                    foreground="white",  # Cor do texto
+                    focuscolor="none")  # Desabilitar foco para o botão
+
+    # Botão para selecionar o CSV com o estilo customizado
+    selecionar_btn = ttk.Button(root, text="Selecionar CSV", command=selecionar_arquivo, style="custom.TButton")
+    selecionar_btn.pack(pady=20)
+
+
+    # Label para mostrar o resultado
+    global resultado_label
+    resultado_label = ttk.Label(root, text="", style="info.TLabel")
+    resultado_label.pack(pady=10)
+
+    # Iniciar a interface
+    root.mainloop()
+
+# Executar a interface
+if __name__ == "__main__":
+    criar_interface()
