@@ -7,7 +7,7 @@ DATA_DIR = os.path.join(BASE_DIR, "data")
 
 # Criar diretório se não existir
 os.makedirs(DATA_DIR, exist_ok=True)
-
+print(f"Diretório de dados: {DATA_DIR}")
 def processar_acessos(arquivo_csv, arquivo_mestre=os.path.join(DATA_DIR, "acessos_consolidados.csv")):
     arquivo_csv = os.path.join(DATA_DIR, arquivo_csv)  # Garante que a entrada esteja na pasta correta
     relatorio_saida = os.path.join(DATA_DIR, "relatorio_acessos.csv")  # Define o caminho do relatório
