@@ -72,6 +72,22 @@ def processar_acessos(arquivo_csv, arquivo_mestre=os.path.join(DATA_DIR, "acesso
     acessos_por_dia_semana.to_csv(relatorio_dia_saida, index=False, sep=';', encoding='utf-8')
     print(f"Relatório de acessos por dia da semana gerado com sucesso: {relatorio_dia_saida}")
 
+    # Gerar lista de usuários únicos com a data do último acesso
+    usuarios_unicos = (
+        df_consolidado
+        .sort_values("Data")  # Ordena pela data
+        .dropna(subset=["Usuario", "Data"])  # Garante que só considera registros válidos
+        .groupby("Usuario")
+        .agg({"Data": "max"})  # Último acesso
+        .reset_index()
+        .rename(columns={"Data": "Último Acesso"})
+    )
+
+    caminho_usuarios = os.path.join(DATA_DIR, "usuarios_unicos.csv")
+    usuarios_unicos.to_csv(caminho_usuarios, index=False, sep=';', encoding='utf-8')
+    print(f"📋 Lista de usuários únicos gerada: {caminho_usuarios}")
+
+
 
 # Iniciar o processamento
 if __name__ == "__main__":
